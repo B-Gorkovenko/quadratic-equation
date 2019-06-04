@@ -1,16 +1,29 @@
 import math
-a = int(input("Введите значение a = "))
-b = int(input("Введите значение b = "))
-c = int(input("Введите значение c = "))
-class Equation:
-    def __init__(self,a,b,c):
-        d = b**2-4*a*c #вычисление дискриминанта
-        if d < 0: #проверка дискриминанта
-            print("Нет корней")
+import unittest
+class TestQuadraticEquation:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+    def test_discriminant(self):
+        d = ((self.b)**2) - (4 * self.a * self.c)
+        return d
+        self.assertEqual(d, 0)
+    def test_root1(self):
+        if self.test_discriminant() < 0:
+            return None
         else:
-            x1 = (-b + math.sqrt(d))/(2*a) #первый корень
-            print("Первый корень равен: " + str(x1))
-            x2 = (-b - math.sqrt(d))/(2*a) #второй корень
-            print("Второй корень равен: " + str(x2))
-s = Equation(a,b,c)#создание объекта, его инициализация
+            r1 = -self.b + math.sqrt(self.test_discriminant()) / (2 * self.a)
+            return r1
+    def test_root2(self):
+        if self.test_discriminant() < 0:
+            return None
+        else:
+            r2 = -self.b - math.sqrt(self.test_discriminant()) / (2 * self.a)
+            return r2
+        self.assertEqual(r2, -1)
+a = TestQuadraticEquation(1,2,3)
+print(a.test_root1())
+print(a.test_root2())
+print(a.test_discriminant())
 
