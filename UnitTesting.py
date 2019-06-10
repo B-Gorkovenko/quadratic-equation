@@ -1,24 +1,39 @@
-import unittest
-import equation as f
+def mergeSort(alist):
+    print("Splitting ", alist)
+    if len(alist) > 1:
+        mid = len(alist)//2
+        lefthalf = alist[:mid]
+        righthalf = alist[mid:]
 
-q = f.QEquation(1,-5,4)
-class Test(unittest.TestCase):
-    def test_0_discriminant(self):
-        a = 9
-        b = q.discriminant()
-        self.assertEqual(a, b)
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
 
-    def test_1_root1(self):
-        a = 4
-        b = q.root1()
-        self.assertEqual(a, b)
+        leftcounter = 0  # for lefthalf
+        rightcounter = 0  # for righthalf
+        commoncounter = 0  # just counter
+        while leftcounter < len(lefthalf) and rightcounter < len(righthalf):
+            if lefthalf[leftcounter] < righthalf[rightcounter]:
+                alist[commoncounter] = lefthalf[leftcounter]
+                leftcounter += 1
+            else:
+                alist[commoncounter] = righthalf[rightcounter]
+                rightcounter += 1
+            commoncounter += 1
 
-    def test_2_root2(self):
-        a = 1
-        b = q.root2()
-        self.assertEqual(a, b)
+        while leftcounter < len(lefthalf):
+            alist[commoncounter] = lefthalf[leftcounter]
+            leftcounter += 1
+            commoncounter += 1
+
+        while rightcounter < len(righthalf):
+            alist[commoncounter] = righthalf[rightcounter]
+            rightcounter += 1
+            commoncounter += 1
+    print("Merging ", alist)
 
 
+alist = [18, 35, 57, 24, 68, 8, 47, 25]
 
-if __name__ == '__main__':
-    unittest.main()
+
+mergeSort(alist)
+print(alist)
