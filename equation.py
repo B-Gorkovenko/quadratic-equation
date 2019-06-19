@@ -2,8 +2,7 @@ import math
 
 
 class NotQuadratic(Exception):
-    def __init__(self):
-        Exception.__init__(self)
+    pass
 
 
 class QEquation:
